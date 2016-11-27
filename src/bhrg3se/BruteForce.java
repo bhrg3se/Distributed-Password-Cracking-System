@@ -5,6 +5,7 @@
  */
 package bhrg3se;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -20,22 +21,32 @@ public class BruteForce {
         String pass=s.next();
         System.out.println("Enter max size");
         int maxSize=s.nextInt();
-        StringBuilder temp=new StringBuilder();
-        for(int i=1;i<=maxSize;i++)
+        ArrayList<Integer> temp=new ArrayList<Integer>();
+        for(int i=0;i<maxSize;i++)
         {
-            for(int j=1;j<=i;j++)
-            {
-                
-            }
+            temp.add(0);
         }
-    
     }
-    private char[] increment(char[] cSet)
+    private void increment(ArrayList<Integer> cSet,int maxSize)
     {
-        if(cSet[cSet.length]=='64')
+        for(int i=cSet.size()-1;i>=0;i--)
         {
+            if(!cSet.get(i).equals(64))
+            {
+                cSet.set(i, cSet.get(i)+1);
+                break;
+            }
+            else
+            {
+                 cSet.set(i, 0);
+                 if(i==0)
+                 {
+                     cSet.add(0,0);
+                 }
+            }
             
-        }
+        }    
+        
     }
     
 }
