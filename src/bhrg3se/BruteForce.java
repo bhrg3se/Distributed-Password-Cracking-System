@@ -14,39 +14,66 @@ import java.util.Scanner;
  */
 public class BruteForce {
     private  char[] choices = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.*".toCharArray();
-   
+    private static int asciiStart=65;
+    private static int asciiEnd=117;
+    private static String pass;
     public static void main(String[] args) {
         Scanner s=new Scanner(System.in);
         System.out.println("Enter password");
-        String pass=s.next();
+        pass=s.next();
         System.out.println("Enter max size");
         int maxSize=s.nextInt();
+        System.out.println("Enter character range in ascii");
+        asciiStart=s.nextInt();
+        asciiEnd=s.nextInt();
+        
+        boolean cracked=false;
         ArrayList<Integer> temp=new ArrayList<Integer>();
-        for(int i=0;i<maxSize;i++)
+        temp.add(asciiStart);
+        while(!cracked)
         {
-            temp.add(0);
+            if(check(temp))
+            {
+                cracked=true;
+                System.out.println("!!!!!!!!!Fuck Yeah!!!!!!!!!!");
+                
+            }
+            else increment(temp);
         }
     }
-    private void increment(ArrayList<Integer> cSet,int maxSize)
+    private static void  increment(ArrayList<Integer> temp)  //remember to use long later just like in GoL
     {
-        for(int i=cSet.size()-1;i>=0;i--)
+        for(int i=temp.size()-1;i>=0;i--)
         {
-            if(!cSet.get(i).equals(64))
+            if(!temp.get(i).equals(asciiEnd))
             {
-                cSet.set(i, cSet.get(i)+1);
+                temp.set(i, temp.get(i)+1);
                 break;
             }
             else
             {
-                 cSet.set(i, 0);
+                 temp.set(i, asciiStart);
                  if(i==0)
                  {
-                     cSet.add(0,0);
+                     temp.add(0,asciiStart);
                  }
             }
             
         }    
         
+    }
+    private static boolean check(ArrayList<Integer> temp)
+    {
+        StringBuilder sb=new StringBuilder();
+        for(int i=0;i<temp.size();i++)
+        {
+            sb.append((char)(temp.get(i).intValue()));
+        }
+        System.out.println(sb);
+        if(sb.toString().equals(pass))
+            return true;
+        else
+            return false;
     }
     
 }
