@@ -27,10 +27,13 @@ public class Worker {
         this.pS=new PrintStream(socket.getOutputStream());
         this.iS=socket.getInputStream();
         new Listner(this);
+        
+                System.out.println("worker created");
     }
     public void send(String s)
     {
         pS.print(s);
+        System.out.println(s+" sent");
         
     }
     public Socket getSocket()

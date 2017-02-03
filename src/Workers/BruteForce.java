@@ -24,7 +24,7 @@ public class BruteForce extends Thread{
         this.end=end;
         this.hash=hash;
         this.ch=choices;
-        
+                System.out.println("BruteForce created");
     }
     
     private  String ch ;
@@ -43,6 +43,7 @@ public class BruteForce extends Thread{
     @Override
     public void run()
     {
+                System.out.println("Bruteforce started");
         cracked=false;
         completed=false;
         cur=new ArrayList();

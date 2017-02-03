@@ -22,11 +22,14 @@ public class Scheduler extends Thread{
     }
     @Override
     public void run() {
+                System.out.println("Scheduler Started");
         while(true)
         {
             if(!jq.isEmpty())
             {
-                 while(wr.workers.isEmpty());
+                
+                 while(wr.workers.isEmpty());// Problem
+                         System.out.println("try");
                 Job j=jq.pop();
                 int part=j.choices.length()/wr.getNum();
                 for(int i=0;i<wr.getNum();i++)
@@ -35,7 +38,7 @@ public class Scheduler extends Thread{
                        
                     
                     wr.workers.get(i).send("ASSIGN "+j.hash+" "+(part*i)+" "+(part*(i+1)));
-                    
+                            System.out.println("Worker "+i+" assigned");
                 }
                 
             }
