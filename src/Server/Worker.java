@@ -26,13 +26,15 @@ public class Worker {
         this.socket=s;
         this.pS=new PrintStream(socket.getOutputStream());
         this.iS=socket.getInputStream();
+        new Listner(this);
     }
     public void send(String s)
     {
         pS.print(s);
         
     }
-    
+    public Socket getSocket()
+    {return socket;}
     
     
 }

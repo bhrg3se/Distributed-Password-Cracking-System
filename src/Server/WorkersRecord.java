@@ -15,6 +15,10 @@ import java.util.ArrayList;
 public class WorkersRecord {
     private int totalOnline;
     public ArrayList<Worker> workers;
+    public WorkersRecord()
+    {
+        workers=new ArrayList<Worker>();
+    }
     public int getNum()
     {
         return workers.size();

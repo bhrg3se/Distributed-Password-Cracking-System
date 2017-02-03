@@ -15,7 +15,7 @@ import java.util.Vector;
  *
  * @author Bhargab
  */
-public class BruteForce {
+public class BruteForce extends Thread{
     
     public BruteForce(int start,int end,String hash,String choices) throws NoSuchAlgorithmException
     {
@@ -34,13 +34,17 @@ public class BruteForce {
     private int start;
     private int end;
     private String hash;
-    private String pass;
-    private boolean cracked=false;
+    public String pass; //dont do this shit
+    private boolean cracked;
     private int len;
+    private boolean completed;
     
     
-    public void start()
+    @Override
+    public void run()
     {
+        cracked=false;
+        completed=false;
         cur=new ArrayList();
         cur.add(0);
         len=1;
@@ -92,6 +96,13 @@ public class BruteForce {
         else
             return false;
     }
-    
+    public int hasFinished()
+    {
+        if(cracked==true)
+            return 1;
+        if(completed=true)
+            return 2;
+        else return 0;
+    }
     
 }

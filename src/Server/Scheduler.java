@@ -14,18 +14,28 @@ import java.util.LinkedList;
 public class Scheduler extends Thread{
     private LinkedList<Job> jq;
     private WorkersRecord wr;
-
+    
+    public Scheduler(LinkedList<Job> jq,WorkersRecord wr)
+    {
+        this.jq=jq;
+        this.wr=wr;
+    }
     @Override
     public void run() {
         while(true)
         {
             if(!jq.isEmpty())
             {
+                 while(wr.workers.isEmpty());
                 Job j=jq.pop();
                 int part=j.choices.length()/wr.getNum();
                 for(int i=0;i<wr.getNum();i++)
                 {
-                    wr.workers.get(i).send("ASSIGN "+j.hash+" "+(part*i)+" "+part);
+                   
+                       
+                    
+                    wr.workers.get(i).send("ASSIGN "+j.hash+" "+(part*i)+" "+(part*(i+1)));
+                    
                 }
                 
             }
