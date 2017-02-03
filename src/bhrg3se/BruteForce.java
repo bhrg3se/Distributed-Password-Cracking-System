@@ -5,6 +5,7 @@
  */
 package bhrg3se;
 
+import Workers.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,7 +14,15 @@ import java.util.Scanner;
  * @author Bhargab
  */
 public class BruteForce {
-    private  char[] choices = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.*".toCharArray();
+    
+    public BruteForce(String start,String end)
+    {
+        
+    }
+//    private  char[] choices = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.*".toCharArray();
+    
+    private ArrayList cur;
+    
     private static int asciiStart=65;
     private static int asciiEnd=117;
     private static String pass;
@@ -35,7 +44,7 @@ public class BruteForce {
             if(check(temp))
             {
                 cracked=true;
-                System.out.println("!!!!!!!!!Fuck Yeah!!!!!!!!!!");
+                System.out.println("!!!!!!!!!Done!!!!!!!!!!");
                 
             }
             else increment(temp);
