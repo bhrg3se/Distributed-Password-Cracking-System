@@ -5,7 +5,8 @@
  */
 package Server;
 
-import Workers.RemoteWorker;
+import RMI.WorkerInt;
+import Workers.WorkerRMI;
 import java.util.ArrayList;
 
 /**
@@ -14,10 +15,14 @@ import java.util.ArrayList;
  */
 public class WorkersRecord {
     private int totalOnline;
-    public ArrayList<RemoteWorker> workers;
+    public ArrayList<WorkerInt> workers;
+    public WorkersRecord()
+    {
+        workers=new ArrayList<WorkerInt>();
+    }
     public int getNum()
     {
         return workers.size();
     }
-    
+   
 }

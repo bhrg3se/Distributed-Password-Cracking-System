@@ -5,6 +5,11 @@
  */
 package Workers;
 
+import RMI.ServerInt;
+import Server.ServerRMI;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -14,9 +19,12 @@ import java.rmi.registry.Registry;
  * @author Bhargab
  */
 public class Main {
-    public static void main(String[] args) throws RemoteException {
+    public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException {
         Registry reg=LocateRegistry.createRegistry(8080);
-    RemoteWorker abc=new RemoteWorker();
-    reg.rebind("worker", abc);
+    WorkerRMI abc=new WorkerRMI();
+    reg.rebind(String.valueOf(abc.hashCode()), abc);
+    ServerInt srmi=(ServerInt)Naming.lookup("rmi://localhost:8081/THE_SERVER");
+    srmi.apply(String.valueOf(abc.hashCode()));
+    
     }
 }

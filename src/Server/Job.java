@@ -14,6 +14,12 @@ public class Job {
     public String choices;
     public int maxLen;
     public String userName;
-    public int jobID;
-    
+ //   public int jobID;
+    public Job(byte[] aHash,String ch,int maxL,String userName)
+    {
+        hash=aHash;
+        ch=choices;
+        maxLen=maxL;
+        this.userName=userName;
+    }
 }

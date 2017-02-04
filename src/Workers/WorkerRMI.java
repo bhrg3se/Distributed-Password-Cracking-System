@@ -16,20 +16,20 @@ import java.util.logging.Logger;
  *
  * @author Bhargab
  */
-public class RemoteWorker extends UnicastRemoteObject implements WorkerInt{
+public class WorkerRMI extends UnicastRemoteObject implements WorkerInt{
     private BruteForce bf;
-    public RemoteWorker() throws RemoteException
+    public WorkerRMI() throws RemoteException
     {
         super();
     }
 
     @Override
-    public void assignJob(byte[] hash, int start, int end) {
+    public void assignJob(byte[] hash, int start, int end,String ch) {
         try {
-            bf=new BruteForce(start, end,hash, "abcdefghijklmnopqrstuvwxyz");
+            bf=new BruteForce(start, end,hash, ch);
             bf.start();
         } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(RemoteWorker.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(WorkerRMI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -6,13 +6,14 @@
 package RMI;
 
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 /**
  *
  * @author Bhargab
  */
 public interface WorkerInt extends Remote{
-    public void assignJob(byte[] hash,int start,int end);
-    public void stop();
+    public void assignJob(byte[] hash,int start,int end,String ch) throws RemoteException;
+    public void stop() throws RemoteException;
     
 }
