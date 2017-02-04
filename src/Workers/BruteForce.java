@@ -17,79 +17,66 @@ import java.util.Vector;
  */
 public class BruteForce extends Thread{
     
-    public BruteForce(int start,int end,byte[] hash,String choices) throws NoSuchAlgorithmException
+    public BruteForce(long start,long end,byte[] hash,String choices) throws NoSuchAlgorithmException
     {
         this.md = MessageDigest.getInstance("SHA-1");
+        
         this.start=start;
         this.end=end;
         this.hash=hash; //??????????????????????????????????????????????????????????????????????????????????
         this.ch=choices;
         System.out.println(hash+choices);
+        arl=new ArrayList<>();
     }
-    
+    private int maxLen;
     private  String ch ;
     //= "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.*";
     private MessageDigest md;
-    private ArrayList<Integer> cur;
-    private int start;
-    private int end;
+    private long cur;
+    private long start;
+    private long end;
     private byte[] hash;
     private String pass;
     private boolean cracked=false;
     private int len;
-    
+    private ArrayList<Integer> arl;
     
     @Override
     public void run()
     {
-        cur=new ArrayList();
-        cur.add(0);
-        len=1;
+        cur=new Integer(0);
+        
+        len=ch.length();
         while(!cracked)
         {
             if(check(cur))
             {
-                pass=cur.toString();
+                
                 cracked=true;
                 
             }
             else
-            increment(cur);
+            cur++;
             
         }
         
     }
-    private void  increment(ArrayList<Integer> temp)  //remember to use long later just like in GoL
+    
+   private boolean check(long temp)
     {
-        for(int i=temp.size()-1;i>=0;i--)
-        {
-            if(!temp.get(i).equals(end))
-            {
-                temp.set(i, temp.get(i)+1);
-                break;
-            }
-            else
-            {
-                 temp.set(i, start);
-                 if(i==0)
-                 {
-                     temp.add(0,start);
-                 }
-            }
-            
-        }    
         
-    }
-   private boolean check(ArrayList<Integer> temp)
-    {
         StringBuilder sb=new StringBuilder();
-        for(int i=0;i<temp.size();i++)
+        for(long i=temp;i>=len;sb.append(ch.charAt((int)(i%len))))
         {
-            sb.append((char)(ch.charAt(temp.get(i))));
+            i=i/len;
         }
+        
         System.out.println(sb);
-        if(sb.toString().equals(hash))
+        if(md.digest(sb.toString().getBytes()).equals(hash))
+        {
+            pass=sb.toString();
             return true;
+        }    
         else
             return false;
     }

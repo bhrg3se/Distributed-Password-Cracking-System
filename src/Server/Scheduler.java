@@ -26,13 +26,15 @@ public class Scheduler extends Thread{
     @Override
     public void run() {
         
-                while(wr.workers.isEmpty()){try {
+                while(wr.workers.isEmpty()){
+                    try {
                     Thread.sleep(100);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Scheduler.class.getName()).log(Level.SEVERE, null, ex);
                     }
-}
-                int part=(j.choices.length())/wr.getNum();
+                    }
+                System.out.println(j.choices+j.hash.toString()+j.userName);
+                long part=(long) (Math.pow(j.choices.length(),j.maxLen)/wr.getNum());
                 for(int i=0;i<wr.getNum();i++)
                 {
                     try {

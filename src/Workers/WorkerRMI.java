@@ -24,7 +24,7 @@ public class WorkerRMI extends UnicastRemoteObject implements WorkerInt{
     }
 
     @Override
-    public void assignJob(byte[] hash, int start, int end,String ch) {
+    public void assignJob(byte[] hash, long start, long end,String ch) {
         try {
             bf=new BruteForce(start, end,hash, ch);
             bf.start();

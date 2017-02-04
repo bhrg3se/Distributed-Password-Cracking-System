@@ -17,8 +17,8 @@ public class Job {
  //   public int jobID;
     public Job(byte[] aHash,String ch,int maxL,String userName)
     {
-        hash=aHash;
-        ch=choices;
+        hash=aHash.clone();
+        choices=ch;
         maxLen=maxL;
         this.userName=userName;
     }

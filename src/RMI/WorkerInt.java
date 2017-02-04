@@ -13,7 +13,7 @@ import java.rmi.RemoteException;
  * @author Bhargab
  */
 public interface WorkerInt extends Remote{
-    public void assignJob(byte[] hash,int start,int end,String ch) throws RemoteException;
+    public void assignJob(byte[] hash,long start,long end,String ch) throws RemoteException;
     public void stop() throws RemoteException;
     
 }

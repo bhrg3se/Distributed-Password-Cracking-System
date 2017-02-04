@@ -19,7 +19,7 @@ public class SMain {
        
    
         //085908f6599e7bd7b4e358a1f06aa61f3569e450=oh
-        Job j=new Job("oh".getBytes(),"abcoh",3,"bhrg3se");
+        Job j=new Job("877c87cc9c2518f8f74964a9454d73f8bb86ffd6".getBytes(),"abc",3,"bhrg3se");
         WorkersRecord wr=new WorkersRecord();
         Registry reg=LocateRegistry.createRegistry(8081);
         ServerRMI abc=new ServerRMI(wr);
