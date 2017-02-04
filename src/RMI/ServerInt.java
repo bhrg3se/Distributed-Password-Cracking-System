@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Server;
+package RMI;
+
+import java.rmi.Remote;
 
 /**
  *
  * @author Bhargab
  */
-public class Dispatcher {
+public interface ServerInt extends Remote{
+    public void completed(String pass);
     
 }

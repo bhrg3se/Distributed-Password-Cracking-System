@@ -15,14 +15,14 @@ import java.util.Vector;
  *
  * @author Bhargab
  */
-public class BruteForce {
+public class BruteForce extends Thread{
     
-    public BruteForce(int start,int end,String hash,String choices) throws NoSuchAlgorithmException
+    public BruteForce(int start,int end,byte[] hash,String choices) throws NoSuchAlgorithmException
     {
         this.md = MessageDigest.getInstance("SHA-1");
         this.start=start;
         this.end=end;
-        this.hash=hash;
+        this.hash=hash; //??????????????????????????????????????????????????????????????????????????????????
         this.ch=choices;
         
     }
@@ -33,13 +33,14 @@ public class BruteForce {
     private ArrayList<Integer> cur;
     private int start;
     private int end;
-    private String hash;
+    private byte[] hash;
     private String pass;
     private boolean cracked=false;
     private int len;
     
     
-    public void start()
+    @Override
+    public void run()
     {
         cur=new ArrayList();
         cur.add(0);

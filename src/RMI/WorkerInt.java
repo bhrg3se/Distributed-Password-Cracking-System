@@ -3,17 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Server;
+package RMI;
+
+import java.rmi.Remote;
 
 /**
  *
  * @author Bhargab
  */
-public class Job {
-    public byte[] hash;
-    public String choices;
-    public int maxLen;
-    public String userName;
-    public int jobID;
+public interface WorkerInt extends Remote{
+    public void assignJob(byte[] hash,int start,int end);
+    public void stop();
     
 }

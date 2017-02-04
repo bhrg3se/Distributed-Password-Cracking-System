@@ -9,6 +9,9 @@ package Server;
  *
  * @author Bhargab
  */
-public class RequestHandler {
+public class SMain {
+    public static void main(String[] args) {
+        
+    }
     
 }

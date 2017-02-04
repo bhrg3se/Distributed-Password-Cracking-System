@@ -17,20 +17,15 @@ public class Scheduler extends Thread{
 
     @Override
     public void run() {
-        while(true)
-        {
-            if(!jq.isEmpty())
-            {
+        
                 Job j=jq.pop();
                 int part=j.choices.length()/wr.getNum();
                 for(int i=0;i<wr.getNum();i++)
                 {
-                    wr.workers.get(i).send("ASSIGN "+j.hash+" "+(part*i)+" "+part);
+                    wr.workers.get(i).assignJob(j.hash,part*i,part*(i+1));
                 }
                 
-            }
-            break;//do only one job
-        }
+        
     }
     
     

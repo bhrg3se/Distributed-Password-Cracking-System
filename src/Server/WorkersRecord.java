@@ -5,7 +5,7 @@
  */
 package Server;
 
-import java.net.Socket;
+import Workers.RemoteWorker;
 import java.util.ArrayList;
 
 /**
@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class WorkersRecord {
     private int totalOnline;
-    public ArrayList<Worker> workers;
+    public ArrayList<RemoteWorker> workers;
     public int getNum()
     {
         return workers.size();
