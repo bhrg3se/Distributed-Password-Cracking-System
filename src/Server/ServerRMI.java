@@ -5,6 +5,7 @@
  */
 package Server;
 
+import RMI.ClientInt;
 import RMI.ServerInt;
 import RMI.WorkerInt;
 import java.net.MalformedURLException;
@@ -34,14 +35,16 @@ public class ServerRMI extends UnicastRemoteObject implements ServerInt{
     for(int i=0;i<SMain.wr.getNum();i++)
     {
         SMain.wr.workers.get(i).stop();
+        SMain.crmi.completed(pass);
     }
+    
     }
 
     @Override
-    public void apply(String id,int port)  {
+    public void apply(String add,int port)  {
      
        try {
-           WorkerInt worker=(WorkerInt)Naming.lookup("rmi://localhost:"+port+"/"+id);
+           WorkerInt worker=(WorkerInt)Naming.lookup("rmi://"+add+":"+port+"/"+"abc");
            SMain.wr.workers.add(worker);
            System.out.println("Applied");
        } catch (NotBoundException ex) {
@@ -52,11 +55,19 @@ public class ServerRMI extends UnicastRemoteObject implements ServerInt{
            Logger.getLogger(ServerRMI.class.getName()).log(Level.SEVERE, null, ex);
        }
     }
-    public void addJob(String aHash,String ch,int maxL,String userName) {
-        Job j=new Job(aHash,ch,maxL,userName);
+    public void addJob(String aHash,String ch,int maxL,String add,int port) throws RemoteException {
+        Job j=new Job(aHash,ch,maxL,add);
         SMain.jobList.push(j);
         new Scheduler(SMain.wr).start();
-        
+       try {
+           
+           SMain.crmi=(ClientInt)Naming.lookup("rmi://"+add+":"+port+"/"+"abc");
+       } catch (NotBoundException ex) {
+           Logger.getLogger(ServerRMI.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (MalformedURLException ex) {
+           Logger.getLogger(ServerRMI.class.getName()).log(Level.SEVERE, null, ex);
+       }
+                    
         System.out.println("cllll");
   }
     

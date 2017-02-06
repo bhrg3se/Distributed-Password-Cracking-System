@@ -16,7 +16,7 @@ import java.rmi.RemoteException;
  */
 public interface ServerInt extends Remote{
     public void completed(String pass) throws RemoteException;
-    public void apply(String id, int port) throws RemoteException;
-    public void addJob(String aHash,String ch,int maxL,String userName) throws RemoteException;
+    public void apply(String add, int port) throws RemoteException;
+    public void addJob(String aHash,String ch,int maxL,String add,int port) throws RemoteException;
     
 }

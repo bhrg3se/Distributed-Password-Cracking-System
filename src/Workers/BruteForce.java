@@ -53,10 +53,10 @@ public class BruteForce extends Thread{
     @Override
     public void run()
     {
-        cur=0;
+        cur=start;
         
         len=ch.length();
-        while(!cracked)
+        while(!cracked&&cur<=end)
         {
             if(check(cur))
             {

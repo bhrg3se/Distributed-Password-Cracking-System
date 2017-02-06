@@ -7,11 +7,12 @@ package RMI;
 
 import Server.Job;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 /**
  *
  * @author Bhargab
  */
 public interface ClientInt extends Remote{
-    public int completed(String password);
+    public void completed(String password) throws RemoteException;
 }

@@ -5,7 +5,10 @@
  */
 package Server;
 
+import RMI.ClientInt;
+import RMI.ServerInt;
 import Workers.WorkerRMI;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -21,6 +24,7 @@ import java.util.logging.Logger;
 public class SMain {
     public static WorkersRecord wr;
     public static LinkedList<Job> jobList;
+    public static ClientInt crmi;
     public static void main(String[] args) throws RemoteException {
        
    
