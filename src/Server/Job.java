@@ -10,14 +10,14 @@ package Server;
  * @author Bhargab
  */
 public class Job {
-    public byte[] hash;
+    public String hash;
     public String choices;
     public int maxLen;
     public String userName;
  //   public int jobID;
-    public Job(byte[] aHash,String ch,int maxL,String userName)
+    public Job(String aHash,String ch,int maxL,String userName)
     {
-        hash=aHash.clone();
+        hash=aHash;
         choices=ch;
         maxLen=maxL;
         this.userName=userName;

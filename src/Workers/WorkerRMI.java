@@ -5,6 +5,7 @@
  */
 package Workers;
 
+import RMI.ServerInt;
 import RMI.WorkerInt;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -18,13 +19,15 @@ import java.util.logging.Logger;
  */
 public class WorkerRMI extends UnicastRemoteObject implements WorkerInt{
     private BruteForce bf;
+    private RMI.ServerInt sint;
     public WorkerRMI() throws RemoteException
     {
         super();
+        
     }
 
     @Override
-    public void assignJob(byte[] hash, long start, long end,String ch) {
+    public void assignJob(String hash, long start, long end,String ch) {
         try {
             bf=new BruteForce(start, end,hash, ch);
             bf.start();

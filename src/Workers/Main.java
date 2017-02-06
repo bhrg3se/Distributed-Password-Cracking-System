@@ -20,11 +20,19 @@ import java.rmi.registry.Registry;
  */
 public class Main {
     public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException {
-        Registry reg=LocateRegistry.createRegistry(8080);
-    WorkerRMI abc=new WorkerRMI();
-    reg.rebind(String.valueOf(abc.hashCode()), abc);
     ServerInt srmi=(ServerInt)Naming.lookup("rmi://localhost:8081/THE_SERVER");
-    srmi.apply(String.valueOf(abc.hashCode()));
+    WorkerRMI abc=new WorkerRMI();
+    int port=1200+(int)(Math.random()*100);
+    System.out.println(port);
+    Registry reg=LocateRegistry.createRegistry(port);
+    reg.rebind(String.valueOf(abc.hashCode()), abc);
+   srmi.apply(String.valueOf(abc.hashCode()),port);
+    
+        
+      
+    
+   
+    
     
     }
 }

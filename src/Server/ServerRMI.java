@@ -20,10 +20,9 @@ import java.util.logging.Logger;
  * @author Bhargab
  */
 public class ServerRMI extends UnicastRemoteObject implements ServerInt{
-   public ServerRMI(WorkersRecord r) throws RemoteException
+   public ServerRMI() throws RemoteException
    {
        super();
-       wr=r;
 
    }
 
@@ -32,18 +31,18 @@ public class ServerRMI extends UnicastRemoteObject implements ServerInt{
     @Override
     public void completed(String pass) throws RemoteException {
     System.out.println("Password is: "+pass);
-    for(int i=0;i<wr.getNum();i++)
+    for(int i=0;i<SMain.wr.getNum();i++)
     {
-        wr.workers.get(i).stop();
+        SMain.wr.workers.get(i).stop();
     }
     }
 
     @Override
-    public void apply(String id)  {
+    public void apply(String id,int port)  {
      
        try {
-           WorkerInt worker=(WorkerInt)Naming.lookup("rmi://localhost:8080/"+id);
-           wr.workers.add(worker);
+           WorkerInt worker=(WorkerInt)Naming.lookup("rmi://localhost:"+port+"/"+id);
+           SMain.wr.workers.add(worker);
            System.out.println("Applied");
        } catch (NotBoundException ex) {
            Logger.getLogger(ServerRMI.class.getName()).log(Level.SEVERE, null, ex);
@@ -53,6 +52,14 @@ public class ServerRMI extends UnicastRemoteObject implements ServerInt{
            Logger.getLogger(ServerRMI.class.getName()).log(Level.SEVERE, null, ex);
        }
     }
-private WorkersRecord wr;
+    public void addJob(String aHash,String ch,int maxL,String userName) {
+        Job j=new Job(aHash,ch,maxL,userName);
+        SMain.jobList.push(j);
+        new Scheduler(SMain.wr).start();
+        
+        System.out.println("cllll");
+  }
+    
+
 
 }

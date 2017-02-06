@@ -5,15 +5,13 @@
  */
 package RMI;
 
+import Server.Job;
 import java.rmi.Remote;
-import java.rmi.RemoteException;
 
 /**
  *
  * @author Bhargab
  */
-public interface WorkerInt extends Remote{
-    public void assignJob(String hash,long start,long end,String ch) throws RemoteException;
-    public void stop() throws RemoteException;
-    
+public interface ClientInt extends Remote{
+    public int completed(String password);
 }

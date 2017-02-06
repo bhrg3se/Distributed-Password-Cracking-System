@@ -15,13 +15,14 @@ import java.util.logging.Logger;
  * @author Bhargab
  */
 public class Scheduler extends Thread{
-    private final Job j;
+    private  Job j;
     private WorkersRecord wr;
     
-    public Scheduler(Job jo,WorkersRecord wrc)
+    public Scheduler(WorkersRecord wrc)
     {
-        this.j=jo;
+        
         wr=wrc;
+        this.j=SMain.jobList.pop();
     }
     @Override
     public void run() {

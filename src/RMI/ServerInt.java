@@ -5,6 +5,7 @@
  */
 package RMI;
 
+import Server.Job;
 import Workers.WorkerRMI;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -15,6 +16,7 @@ import java.rmi.RemoteException;
  */
 public interface ServerInt extends Remote{
     public void completed(String pass) throws RemoteException;
-    public void apply(String id) throws RemoteException;
+    public void apply(String id, int port) throws RemoteException;
+    public void addJob(String aHash,String ch,int maxL,String userName) throws RemoteException;
     
 }
