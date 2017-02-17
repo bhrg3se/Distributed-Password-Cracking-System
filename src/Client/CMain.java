@@ -24,8 +24,9 @@ public class CMain {
     public static UI ui;
     public static int port;
     public static void main(String[] args) throws NotBoundException, MalformedURLException, RemoteException {
-         ServerInt srmi=(ServerInt)Naming.lookup("rmi://localhost:8081/THE_SERVER");
-         
+         ServerInt srmi=(ServerInt)Naming.lookup("rmi://192.168.1.100:8081/THE_SERVER");
+         port=1200+(int)(Math.random()*100);
+    System.out.println(port);
            
          java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
