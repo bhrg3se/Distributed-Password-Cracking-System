@@ -36,7 +36,7 @@ public class Scheduler extends Thread{
                     }
                 System.out.println(j.choices+j.hash.toString()+j.userName);
                 long part=(long) (Math.pow(j.choices.length(),j.maxLen)/wr.workers.size());
-                for(int i=0;i<wr.getNum();i++)
+                for(int i=0;i<wr.workers.size();i++)
                 {
                     try {
                         wr.workers.get(i).assignJob(j.hash,part*i,part*(i+1),j.choices);

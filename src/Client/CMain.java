@@ -6,8 +6,10 @@
 package Client;
 
 import RMI.ServerInt;
+import static Workers.Main.getIp;
 import Workers.WorkerRMI;
 import java.net.MalformedURLException;
+import java.net.SocketException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -23,8 +25,14 @@ import java.util.logging.Logger;
 public class CMain {
     public static UI ui;
     public static int port;
-    public static void main(String[] args) throws NotBoundException, MalformedURLException, RemoteException {
-         ServerInt srmi=(ServerInt)Naming.lookup("rmi://192.168.1.100:8081/THE_SERVER");
+    public static String add;
+    public static void main(String[] args) throws NotBoundException, MalformedURLException, RemoteException, SocketException {
+         
+         add=getIp();
+    System.setProperty("java.rmi.server.hostname",add);
+   
+        
+        ServerInt srmi=(ServerInt)Naming.lookup("rmi://192.168.1.100:8081/THE_SERVER");
          port=1200+(int)(Math.random()*100);
     System.out.println(port);
            
@@ -34,7 +42,7 @@ public class CMain {
                 ui.setVisible(true);
             }
         });
-         
+   
     ClientRMI abc=new ClientRMI();
     port=1200+(int)(Math.random()*100);
     System.out.println(port);

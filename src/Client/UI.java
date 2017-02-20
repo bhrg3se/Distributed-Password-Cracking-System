@@ -9,6 +9,7 @@ import RMI.ServerInt;
 import Server.Job;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -129,10 +130,10 @@ public class UI extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             uName=jTextField4.getText();
-            srmi.addJob(jTextField1.getText(),jTextField2.getText(),Integer.parseInt(jTextField3.getText()),InetAddress.getLocalHost().getHostAddress(),CMain.port);
+            srmi.addJob(jTextField1.getText(),jTextField2.getText(),Integer.parseInt(jTextField3.getText()),Workers.Main.getIp(),CMain.port);
         } catch (RemoteException ex) {
             Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnknownHostException ex) {
+        } catch (SocketException ex) {
             Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

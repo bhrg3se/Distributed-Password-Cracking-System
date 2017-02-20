@@ -30,6 +30,8 @@ public class SMain {
    
         //085908f6599e7bd7b4e358a1f06aa61f3569e450=oh
  //       Job j=new Job("c64d3fcde20c5cd03142171e5ac47a87aa3c8ace","abc",3,"bhrg3se");
+     System.setProperty("java.rmi.server.hostname","192.168.1.100");
+
         wr=new WorkersRecord();
         jobList=new LinkedList<Job>();
         Registry reg=LocateRegistry.createRegistry(8081);

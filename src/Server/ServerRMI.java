@@ -31,13 +31,18 @@ public class ServerRMI extends UnicastRemoteObject implements ServerInt{
 
     @Override
     public void completed(String pass) throws RemoteException {
-    System.out.println("Password is: "+pass);
-    for(int i=0;i<SMain.wr.getNum();i++)
+    
+ /*   for(int i=0;i<SMain.wr.workers.size();i++)
     {
         SMain.wr.workers.get(i).stop();
-        SMain.crmi.completed(pass);
     }
+  */
+   
+
+     System.out.println("Password is: "+pass);
     
+    SMain.crmi.completed(pass);  
+        
     }
 
     @Override
@@ -56,9 +61,7 @@ public class ServerRMI extends UnicastRemoteObject implements ServerInt{
        }
     }
     public void addJob(String aHash,String ch,int maxL,String add,int port) throws RemoteException {
-        Job j=new Job(aHash,ch,maxL,add);
-        SMain.jobList.push(j);
-        new Scheduler(SMain.wr).start();
+       
        try {
            
            SMain.crmi=(ClientInt)Naming.lookup("rmi://"+add+":"+port+"/"+"abc");
@@ -67,7 +70,9 @@ public class ServerRMI extends UnicastRemoteObject implements ServerInt{
        } catch (MalformedURLException ex) {
            Logger.getLogger(ServerRMI.class.getName()).log(Level.SEVERE, null, ex);
        }
-                    
+          Job j=new Job(aHash,ch,maxL,add);
+        SMain.jobList.push(j);
+        new Scheduler(SMain.wr).start();           
         System.out.println("cllll");
   }
     

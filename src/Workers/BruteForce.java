@@ -63,12 +63,8 @@ public class BruteForce extends Thread{
                 
                 cracked=true;
                 try {
-                    ServerInt srmi=(ServerInt)Naming.lookup("rmi://localhost:8081/THE_SERVER");
-                    srmi.completed(pass);
-                } catch (NotBoundException ex) {
-                    Logger.getLogger(BruteForce.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (MalformedURLException ex) {
-                    Logger.getLogger(BruteForce.class.getName()).log(Level.SEVERE, null, ex);
+                //    ServerInt srmi=(ServerInt)Naming.lookup("rmi://192.168.100.39:8081/THE_SERVER");
+                    Main.srmi.completed(pass);
                 } catch (RemoteException ex) {
                     Logger.getLogger(BruteForce.class.getName()).log(Level.SEVERE, null, ex);
                 }

@@ -20,9 +20,6 @@ public class WorkersRecord {
     {
         workers=new ArrayList<WorkerInt>();
     }
-    public int getNum()
-    {
-        return workers.size();
-    }
+    
    
 }
