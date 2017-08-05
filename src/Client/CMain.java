@@ -32,7 +32,7 @@ public class CMain {
     System.setProperty("java.rmi.server.hostname",add);
    
         
-        ServerInt srmi=(ServerInt)Naming.lookup("rmi://192.168.1.100:8081/THE_SERVER");
+        ServerInt srmi=(ServerInt)Naming.lookup("rmi://localhost:8081/THE_SERVER");
          port=1200+(int)(Math.random()*100);
     System.out.println(port);
            
