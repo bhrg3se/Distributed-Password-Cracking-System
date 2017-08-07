@@ -26,14 +26,15 @@ import org.apache.commons.codec.digest.DigestUtils;
  */
 public class BruteForce extends Thread{
     
-    public BruteForce(long start,long end,String hash,String choices) throws NoSuchAlgorithmException
+    public BruteForce(long start,long end,String hash,String choices,String algo,String salt,String saltPos) throws NoSuchAlgorithmException
     {
-        this.md = MessageDigest.getInstance("SHA-1");
-        
+        this.md = MessageDigest.getInstance(algo);
         this.start=start;
         this.end=end;
         this.hash=hash; //??????????????????????????????????????????????????????????????????????????????????
         this.ch=choices;
+        this.salt=salt;
+        this.saltPos=saltPos;
         System.out.println(hash+choices);
         arl=new ArrayList<>();
     }
@@ -48,6 +49,8 @@ public class BruteForce extends Thread{
     private String pass;
     private boolean cracked=false;
     private int len;
+    private String salt;
+    private String saltPos;
     private ArrayList<Integer> arl;
     
     @Override
@@ -91,15 +94,24 @@ public class BruteForce extends Thread{
             
         }while(i>=len);
         System.out.println(sb.toString());
-        /*System.out.println(md.digest(sb.toString().getBytes()));
-        System.out.println("=");
-        System.out.println(sb.length());
+        //System.out.println(md.digest(sb.toString().getBytes()));
+        System.out.println(byteArray2Hex(md.digest(sb.toString().getBytes())));
+       /* System.out.println(sb.length());
         System.out.println(hash);
+        8f6abfbac8c81b55f9005f7ec09e32d29e40eb40
         System.out.println("      h");
          */
        // .equals(hash)
-        
-        if(byteArray2Hex(md.digest(sb.toString().getBytes())).equals(hash))
+       String line=sb.toString();
+        if(saltPos=="Before")
+                    {
+                        line=salt+line;
+                    }
+                    else if(saltPos=="After")
+                    {
+                        line=line+salt;
+                    }
+        if(byteArray2Hex(md.digest(line.getBytes())).equals(hash))
         {
             System.out.println(sb);
             pass=sb.toString();

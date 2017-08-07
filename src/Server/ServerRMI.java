@@ -33,11 +33,11 @@ public class ServerRMI extends UnicastRemoteObject implements ServerInt{
     @Override
     public void completed(String pass) throws RemoteException {
     
- /*   for(int i=0;i<SMain.wr.workers.size();i++)
+    for(int i=0;i<SMain.wr.workers.size();i++)
     {
         SMain.wr.workers.get(i).stop();
     }
-  */
+  
    
 
      System.out.println("Password is: "+pass);
@@ -69,7 +69,7 @@ public class ServerRMI extends UnicastRemoteObject implements ServerInt{
        try {
            String add=getClientHost();
            SMain.crmi=(ClientInt)Naming.lookup("rmi://"+add+":"+port+"/"+"abc");
-           Job j=new Job(hash,charset,maxLen,add);
+           Job j=new Job(hash,algo, charset, maxLen,salt, saltPos);
            SMain.jobList.push(j);
         new Scheduler(SMain.wr).start();           
         System.out.println("cllll");
@@ -78,6 +78,20 @@ public class ServerRMI extends UnicastRemoteObject implements ServerInt{
        }   
         
   }
+
+    @Override
+    public void stop() {
+        for(int i=0;i<SMain.wr.workers.size();i++)
+    {
+            try {
+                SMain.wr.workers.get(i).stop();
+            } catch (RemoteException ex) {
+                Logger.getLogger(ServerRMI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
+  
+       
+    }
     
 
 

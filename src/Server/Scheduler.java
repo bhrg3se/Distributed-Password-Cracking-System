@@ -34,12 +34,12 @@ public class Scheduler extends Thread{
                         Logger.getLogger(Scheduler.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     }
-                System.out.println(j.choices+j.hash.toString()+j.userName);
+                System.out.println(j.choices+j.hash.toString());
                 long part=(long) (Math.pow(j.choices.length(),j.maxLen)/wr.workers.size());
                 for(int i=0;i<wr.workers.size();i++)
                 {
                     try {
-                        wr.workers.get(i).assignJob(j.hash,part*i,part*(i+1),j.choices);
+                        wr.workers.get(i).assignJob(j.hash,part*i,part*(i+1),j.choices,j.algo,j.salt,j.saltPos);
                     } catch (RemoteException ex) {
                         Logger.getLogger(Scheduler.class.getName()).log(Level.SEVERE, null, ex);
                     }

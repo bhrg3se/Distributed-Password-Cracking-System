@@ -7,6 +7,7 @@ package Client;
 
 import RMI.ServerInt;
 import Server.Job;
+import java.awt.CardLayout;
 import java.io.File;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
@@ -151,12 +152,10 @@ public class UI extends javax.swing.JFrame {
                             .addComponent(jButton1))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel8)))
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel8))
                             .addGap(0, 341, Short.MAX_VALUE)))
                     .addContainerGap()))
         );
@@ -305,7 +304,9 @@ public class UI extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
+        CardLayout cl = (CardLayout) jPanel1.getParent().getLayout();
+        cl.first(jPanel1.getParent());
+        srmi.stop();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

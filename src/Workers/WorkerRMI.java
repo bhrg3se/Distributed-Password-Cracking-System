@@ -27,9 +27,9 @@ public class WorkerRMI extends UnicastRemoteObject implements WorkerInt{
     }
 
     @Override
-    public void assignJob(String hash, long start, long end,String ch) {
+    public void assignJob(String hash, long start, long end,String ch,String algo,String salt,String saltPos) {
         try {
-            bf=new BruteForce(start, end,hash, ch);
+            bf=new BruteForce(start, end,hash, ch,algo,salt,saltPos);
             bf.start();
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(WorkerRMI.class.getName()).log(Level.SEVERE, null, ex);

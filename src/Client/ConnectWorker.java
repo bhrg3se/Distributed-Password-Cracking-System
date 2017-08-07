@@ -64,7 +64,7 @@ public class ConnectWorker extends SwingWorker<ServerInt, Object> {
 
         srmi = (ServerInt) Naming.lookup("rmi://" + servAdd + ":8081/THE_SERVER");
 
-        ClientRMI abc = new ClientRMI();
+        ClientRMI abc = new ClientRMI(j);
 
         Registry reg = LocateRegistry.createRegistry(5555);
         reg.rebind("abc", abc);
@@ -78,6 +78,14 @@ public class ConnectWorker extends SwingWorker<ServerInt, Object> {
             try (BufferedReader br = new BufferedReader(new FileReader(dictFile))) {
                 String line;
                 while ((line = br.readLine()) != null) {
+                    if(saltPos=="Before")
+                    {
+                        line=salt+line;
+                    }
+                    else if(saltPos=="After")
+                    {
+                        line=line+salt;
+                    }
                     if(byteArray2Hex(m.digest(line.getBytes())).equals(hash))
                             {
                                 j.setText("Password is:"+line);

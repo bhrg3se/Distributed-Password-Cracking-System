@@ -18,5 +18,5 @@ public interface ServerInt extends Remote{
     public void completed(String pass) throws RemoteException;
     public void apply( int port) throws RemoteException;
     public void addJob(String hash,String algo,String charset,int maxLen,String salt,String saltPos,int port) throws RemoteException;
-    
+    public void stop();
 }

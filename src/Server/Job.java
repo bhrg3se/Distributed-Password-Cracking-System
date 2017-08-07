@@ -13,13 +13,19 @@ public class Job {
     public String hash;
     public String choices;
     public int maxLen;
-    public String userName;
+    public String algo;
+    public String salt;
+    public String saltPos;
  //   public int jobID;
-    public Job(String aHash,String ch,int maxL,String userName)
+    public Job(String hash,String algo,String charset,int maxLen,String salt,String saltPos)
     {
-        hash=aHash;
-        choices=ch;
-        maxLen=maxL;
-        this.userName=userName;
+        this.hash=hash;
+        choices=charset;
+        this.maxLen=maxLen;
+        this.algo=algo;
+        this.salt=salt;
+        this.saltPos=saltPos;
+        
+        
     }
 }
