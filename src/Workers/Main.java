@@ -27,8 +27,8 @@ import java.util.Enumeration;
  */
 public class Main {
     public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException, UnknownHostException, IOException {
-    String add=getIp();
-    System.setProperty("java.rmi.server.hostname",add);
+    //String add=getIp();
+    //System.setProperty("java.rmi.server.hostname",add);
     srmi=(ServerInt)Naming.lookup("rmi://localhost:8081/THE_SERVER");
     WorkerRMI abc=new WorkerRMI();
     int port=1200+(int)(Math.random()*100);
@@ -37,9 +37,8 @@ public class Main {
     
     reg.rebind("abc", abc);
     
-    srmi.apply(add,port);
+    srmi.apply(port);
 //   srmi.apply(InetAddress.getLocalHost().getHostAddress(),port);
-    System.out.println(add);
    
         
       

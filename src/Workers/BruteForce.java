@@ -99,7 +99,7 @@ public class BruteForce extends Thread{
          */
        // .equals(hash)
         
-        if(byteArray2Hex(DigestUtils.sha(sb.toString())).equals(hash))
+        if(byteArray2Hex(md.digest(sb.toString().getBytes())).equals(hash))
         {
             System.out.println(sb);
             pass=sb.toString();

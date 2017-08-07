@@ -12,6 +12,7 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.server.ServerNotActiveException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,9 +47,10 @@ public class ServerRMI extends UnicastRemoteObject implements ServerInt{
     }
 
     @Override
-    public void apply(String add,int port)  {
+    public void apply(int port)  {
      
        try {
+           String add=getClientHost();
            WorkerInt worker=(WorkerInt)Naming.lookup("rmi://"+add+":"+port+"/"+"abc");
            SMain.wr.workers.add(worker);
            System.out.println("Applied");
@@ -58,22 +60,23 @@ public class ServerRMI extends UnicastRemoteObject implements ServerInt{
            Logger.getLogger(ServerRMI.class.getName()).log(Level.SEVERE, null, ex);
        } catch (RemoteException ex) {
            Logger.getLogger(ServerRMI.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (ServerNotActiveException ex) {
+           Logger.getLogger(ServerRMI.class.getName()).log(Level.SEVERE, null, ex);
        }
     }
-    public void addJob(String aHash,String ch,int maxL,String add,int port) throws RemoteException {
+    public void addJob(String hash,String algo,String charset,int maxLen,String salt,String saltPos,int port) throws RemoteException {
        
        try {
-           
+           String add=getClientHost();
            SMain.crmi=(ClientInt)Naming.lookup("rmi://"+add+":"+port+"/"+"abc");
-       } catch (NotBoundException ex) {
-           Logger.getLogger(ServerRMI.class.getName()).log(Level.SEVERE, null, ex);
-       } catch (MalformedURLException ex) {
-           Logger.getLogger(ServerRMI.class.getName()).log(Level.SEVERE, null, ex);
-       }
-          Job j=new Job(aHash,ch,maxL,add);
-        SMain.jobList.push(j);
+           Job j=new Job(hash,charset,maxLen,add);
+           SMain.jobList.push(j);
         new Scheduler(SMain.wr).start();           
         System.out.println("cllll");
+       } catch (NotBoundException | MalformedURLException | ServerNotActiveException ex) {   
+           Logger.getLogger(ServerRMI.class.getName()).log(Level.SEVERE, null, ex);
+       }   
+        
   }
     
 

@@ -23,39 +23,22 @@ import java.util.logging.Logger;
  * @author Bhargab
  */
 public class CMain {
+
     public static UI ui;
     public static int port;
     public static String add;
+
     public static void main(String[] args) throws NotBoundException, MalformedURLException, RemoteException, SocketException {
-         
-         add=getIp();
-    System.setProperty("java.rmi.server.hostname",add);
-   
-        
-        ServerInt srmi=(ServerInt)Naming.lookup("rmi://localhost:8081/THE_SERVER");
-         port=1200+(int)(Math.random()*100);
-    System.out.println(port);
-           
-         java.awt.EventQueue.invokeLater(new Runnable() {
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                CMain.ui=new UI(srmi);
+                CMain.ui = new UI();
                 ui.setVisible(true);
             }
         });
-   
-    ClientRMI abc=new ClientRMI();
-    port=1200+(int)(Math.random()*100);
-    System.out.println(port);
-    Registry reg=LocateRegistry.createRegistry(port);
-    reg.rebind("abc", abc);
-    while((ui==null)||(ui.uName==null))
-    {        try {
-        Thread.sleep(100);
-             } catch (InterruptedException ex) {
-                 Logger.getLogger(CMain.class.getName()).log(Level.SEVERE, null, ex);
-             }
-}
-    
+
+     
+
     }
-   
+
 }
