@@ -21,6 +21,7 @@ import java.util.Formatter;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.SwingWorker;
 
 /**
@@ -39,8 +40,9 @@ public class ConnectWorker extends SwingWorker<ServerInt, Object> {
     private JPanel jPanel;
     private ServerInt srmi;
     private File dictFile;
+    private JTable t;
 
-    public ConnectWorker(String hash, String algo, String charset, int maxLen, String salt, String saltPos, String servAdd, JPanel jPanel, ServerInt srmi, File dictFile) {
+    public ConnectWorker(String hash, String algo, String charset, int maxLen, String salt, String saltPos, String servAdd, JPanel jPanel, ServerInt srmi, File dictFile,JTable t) {
         this.hash = hash;
         this.algo = algo;
         this.charset = charset;
@@ -51,12 +53,17 @@ public class ConnectWorker extends SwingWorker<ServerInt, Object> {
         this.jPanel = jPanel;
         this.srmi = srmi;
         this.dictFile = dictFile;
+        this.t=t;
     }
 
     @Override
     protected ServerInt doInBackground() throws Exception {
         //add = getIp();
+        
         JLabel j = (JLabel) jPanel.getComponent(0);
+        
+        
+        System.out.println("Here");
         j.setText("Connecting");
         CardLayout cl = (CardLayout) jPanel.getParent().getLayout();
         cl.last(jPanel.getParent());
@@ -68,9 +75,25 @@ public class ConnectWorker extends SwingWorker<ServerInt, Object> {
 
         Registry reg = LocateRegistry.createRegistry(5555);
         reg.rebind("abc", abc);
-
+        
+        j.setText("Password Cracking In progress");
+        
         srmi.addJob(hash, algo, charset, maxLen, salt, saltPos, 5555);
         
+        t.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{
+                    {"Hash", hash},
+                    {"Algorithm", algo},
+                    {"Character Set", charset},
+                    {"Max Length", maxLen},
+                    {"Salt", salt},
+                    {"No of workers", null},
+                    
+                },
+                new String[]{
+                    "", ""
+                }
+        ));
         
         MessageDigest m=MessageDigest.getInstance(algo);
 

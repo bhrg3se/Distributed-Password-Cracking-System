@@ -80,7 +80,7 @@ public class ServerRMI extends UnicastRemoteObject implements ServerInt{
   }
 
     @Override
-    public void stop() {
+    public void stop() throws RemoteException{
         for(int i=0;i<SMain.wr.workers.size();i++)
     {
             try {
